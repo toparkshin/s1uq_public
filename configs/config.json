@@ -1,0 +1,39 @@
+{
+	"root_data_dir": "your_data_dir",
+
+	"project_name": "test",
+	"run_name": "run_name_stored_in_WandB",
+	"save_name": "filename_stored_in_the_checkpoints_folder.pth",
+
+	"data_prefix": "your_data_prefix",
+	"data_start_idx": 28,
+    "data_end_idx": 37,
+
+	"uq_mode": "combined",
+	"n_logit_samples": 20,
+
+	"train_batch_size": 64,
+	"valid_batch_size": 4,
+	"test_batch_size": 16,
+	"lr": 0.0001,
+
+	"n_class": 2,
+	"n_signal": 9,
+	"n_embd": 30,
+	"n_layer": 2,
+	"embd_pdrop": 0.1,
+	"resid_pdrop": 0.1,
+	"attn_pdrop": 0.1,
+
+	"num_iters": 50000,
+	"num_workers": 0,
+	"seed": 42,
+
+	"validate": true,
+	"save_at_end": true,
+	"save_with_val_loss": true,
+
+	"eval_every": 100,
+	"visualize_every": -1,
+	"save_every": -1
+}
