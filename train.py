@@ -27,7 +27,7 @@ def train():
     train_dataloader = DataFetcher(get_train_dataloader(config), device=device)
     eval_dataloader = get_valid_dataloader(config) if config.validate else None
 
-    writer = wandb.init(project=config.project_name, entity="toparkshin", name=config.run_name)
+    writer = wandb.init(project=config.project_name, entity="your_wandb_id", name=config.run_name)
 
     trainer = Trainer(
         config=config,

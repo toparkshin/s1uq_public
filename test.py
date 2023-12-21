@@ -26,7 +26,7 @@ def get_model(config, device):
 
 if __name__ == "__main__":
     save_result = True
-    num_mcd = 10
+    num_mcd = 1000
 
     root = tkinter.Tk()
     root.withdraw()
