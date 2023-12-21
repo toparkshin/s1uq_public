@@ -1,4 +1,4 @@
-## Uncertainty Quantification Framework for Calcium Imaging Data
+# Uncertainty Quantification Framework for Calcium Imaging Data
 
 #### This project involves using a transformer model to calculate both epistemic and aleatoric uncertainties from fluorescence intensity data of 2-photon calcium imaging obtained during the vibration frequency discrimination task in the fS1
 
