@@ -134,17 +134,18 @@ class Trainer:
             x, y = x.to(self.device), y.to(self.device)
             self.on_train_batch_begin(it, (x, y))
 
-            out, _ = self.model(x, training=True)
-            loss = F.cross_entropy(out, y.to(torch.long))
+            output = self.model(x, training=True)
+            loss = aleatoric_loss(output, y.to(torch.long))  # Updated loss calculation
             loss.backward()
             self.optimizer.step()
             self.optimizer.zero_grad()
 
             self.train_loss.update(float(loss))
-            self.train_acc.update(calculate_acc(out, y))
+            acc = calculate_acc(output[0], y)  # Use mu to calculate accuracy
+            self.train_acc.update(acc)
 
             pbar.set_description(
-                f"Train: Iter - {it} Loss - {float(self.train_loss.val):.8f} Accuarcy - {float(self.train_acc.val)}",
+                f"Train: Iter - {it} Loss - {float(self.train_loss.val):.8f} Accuarcy - {float(self.train_acc.val)}"
             )
 
             self.on_train_batch_end(it, (x, y))
@@ -173,3 +174,9 @@ class Trainer:
             self.on_eval_batch_end()
 
         self.on_eval_end()
+
+    def aleatoric_loss(output, target):
+        mu, logvar = output
+        sigma = torch.sqrt(torch.exp(logvar))
+        # Negative log likelihood assuming a Gaussian distribution
+        return torch.mean(0.5 * torch.log(2 * math.pi * sigma ** 2) + 0.5 * ((target - mu) ** 2) / (sigma ** 2))
